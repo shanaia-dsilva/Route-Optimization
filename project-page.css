@@ -1,0 +1,9 @@
+body {
+    background-color: aliceblue;
+}
+
+nav{
+    position: fixed;
+    background-color: rgb(191, 208, 223);
+    margin: 0.2rem;
+}

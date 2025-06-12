@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>New Route Optimizer</title>
+  <script src="project_create.js" defer></script>
+</head>
+<body>
+  <nav id='nav-bar'>
+   <ul>
+        <li> <a id="upload" href="#data-upload">Data Upload</a></li>
+        <li><a id="calculate" href="#dist-calc">Distance Calculation</a></li>
+        <li><a id="optimize" href="#optimization">Optimization</a></li>
+        <li><a id="export" href="#export">Export Results</a></li>
+        <li><a id="history" href="#export">History</a></li>
+    </ul>
+  </nav>
+   <section id='data-upload-sec'></section> 
+   <section id="dist-calc-sec"></section>
+   <section id="optimization-sec"></section>
+   <section id="export-sec"></section>
+   <section id='history-sec'></section>
+  <h2>Upload Bus/Route File</h2>
+  <input type="file" id="fileInput">
+  <button onclick="uploadFile()">Upload</button>
+  <pre id="resultBox"></pre>
+  <link rel="stylesheet" href="project-page.css">
+</body>
+</html>

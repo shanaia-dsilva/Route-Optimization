@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+pandas
+requests
+scipy
+upload --> get lat, longs -->
+validate --> haversine algorithm 
+report the data that seems wrong, for further verification
+optimize --> batch --> requests --> OSRM -->

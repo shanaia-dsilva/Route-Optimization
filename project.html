@@ -51,7 +51,7 @@
       </form>
     </div> -->   
     <div class="page-details">
-      <h1>Route Optimization Workflow</h1>
+      <h2>Route Optimization Workflow</h2>
       <p>Upload route data and optimize driver assignments</p></div>  
     <div class="container">
       <h3>Upload Your files</h3>
@@ -66,12 +66,21 @@
     </div>
    </section> 
    <section id="dist-calc-sec">
-    <h2>Ready to Calculate Distances</h2>
-    <p1>Start distance calculation to compute optimal routes between drivers and pickup points.</p1>
+     <div class="page-details">
+      <h2>Ready to Calculate Distances</h2>
+    <p1>Start distance calculation to compute optimal routes between drivers and pickup points.</p1></div> 
     <button id="start" onclick="generate_distance_matrix()">Start Calculating</button>
    </section>
-   <section id="optimization-sec"></section>
-   <section id="export-sec"></section>
+   <section id="optimization-sec">
+     <div class="page-details">
+      <h2>Route Optimization</h2>
+    <p1>Optimize driver-pickup assignments using Hungarian algorithm</p1></div> 
+   </section>
+   <section id="export-sec">
+     <div class="page-details">
+      <h2>Export Results</h2>
+    <p1>Export your optimized driver assignment results as an excel or view the reports.</p1></div> 
+   </section>
    <section id='history-sec'></section>
   
   <pre id="resultBox"></pre>

@@ -5,22 +5,61 @@
   <script src="script.js" defer></script>
 </head>
 <body>
-  <section id='dashboard'>
-    <h1>Dashboard</h1>
-    <a class="new-project" href="project.html"> + New Project</a>
-    <p1>Manage your route optimization projects</p1>
-    <div class="info-tiles">
-      <div>Total Projects</div>
-      <div>Active Projects</div>
-      <div>Routes Optimized</div>
-      <div>Avg. Savings</div>
+    <nav id="nav-bar">
+        <ul>
+            <li><img src="logo.png"></li>
+            <li>Baghirathi Travel Solutions Private Limited</li>
+        </ul>
+    </nav>
+    <section id='dashboard-sec'>
+        <div id="dashboard">
+            <ul>
+                <li><h1>Dashboard</h1><p>Manage your route optimization projects</p></li>
+                <li><a class="new-project" href="project.html"> + New Project</a></li>
+            </ul>
+        </div>
+    </section>
+    <hr>
+    <section id="stats-sec">
+  <div class="info-tiles">
+    <div class="stat-tile">
+      <div class="stat-title">Total Projects</div>
+      <div class="stat-value" id="total-projects-num"></div>
+      <img src="tot-project.jpg" class="stat-img folder-img" />
     </div>
-    <div class="'recent-projects"></div>
-  </section><h1>Baghirathi Solutions</h1>
-  <h2>Upload Bus/Route File</h2>
-  <input type="file" id="fileInput">
-  <button onclick="uploadFile()">Upload</button>
-  <pre id="resultBox"></pre>
+    <div class="stat-tile">
+      <div class="stat-title">Routes Optimized</div>
+      <div class="stat-value" id="routes-num"></div>
+      <img src="route-project.jpg" class="stat-img route-pro-img" />
+    </div>
+    <div class="stat-tile">
+      <div class="stat-title">Avgerage Savings</div>
+      <div class="stat-value" id="savings-num"></div>
+      <img src="graph.png" class="stat-img savings-img" />
+    </div>
+  </div>
+</section>
+    <section id="description-sec">
+    <h2>Plan stress-free journeys. Discover your routing  </h2>
+        <div class="phase-tile">
+            <a href="project.html#data-upload-sec" class="phase-card">
+                <img src="upload-icon.png" class="project-img">
+                <p class="project-title">Phase 1<br>Upload Your Data</p>
+            </a>
+            <a href="project.html#dist-calc-sec" class="phase-card">
+                <img src="calcc.png" class="project-img">
+                <p class="project-title">Phase 2<br>Data Validation</p>
+            </a>
+            <a href="project.html#optimization-sec" class="phase-card">
+                <img src="optimize-icon.png" class="project-img">
+                <p class="project-title">Phase 3<br>Route Optimization</p>
+            </a>
+            <a href="project.html#export-sec" class="phase-card">
+                <img src="export-icon.png" class="project-img">
+                <p class="project-title">Phase 4<br>Export Data</p>
+            </a>
+        </div> 
+    </section>
   <link rel="stylesheet" href="style.css">
 </body>
 </html>

@@ -2,27 +2,77 @@
 <html>
 <head>
   <title>New Route Optimizer</title>
-  <script src="project_create.js" defer></script>
+  <script src="project-create.js" defer></script>
 </head>
 <body>
-  <nav id='nav-bar'>
-   <ul>
-        <li> <a id="upload" href="#data-upload">Data Upload</a></li>
-        <li><a id="calculate" href="#dist-calc">Distance Calculation</a></li>
-        <li><a id="optimize" href="#optimization">Optimization</a></li>
-        <li><a id="export" href="#export">Export Results</a></li>
-        <li><a id="history" href="#export">History</a></li>
+    <div id="nav-head">
+        <ul>
+        <li>
+          <div class="logo-container">
+            <img src="logo.png" alt="logo" class="logo-img">
+            <div class="logo-text">
+              <h2>Route Optimizer</h2>
+            </div>
+          </div>
+        </li>
+        <hr>
+        <li class="nav-list">
+          <a id="upload" href="#data-upload-sec">
+            <img src="upload-icon.png" alt='data-upload' class="nav-img">
+          Data Upload</a></li>
+        <li class="nav-list">
+          <a id="calculate" href="#dist-calc-sec">
+          <img src="calcc.png" alt='calculation' class="nav-img">
+          Distance Calculation</a></li>
+        <li class="nav-list">
+          <a id="optimize" href="#optimization-sec">
+            <img src="optimize-icon.png" alt='optimization' class="nav-img">
+          Optimization</a></li>
+        <li class="nav-list">
+          <a id="export" href="#export-sec"><img src="export-icon.png" alt='export' class="nav-img">
+          Export Results</a></li>
+        <li class="nav-list">
+          <a id="history" href="#history-sec"><img src="history-icon.png" alt='history' class="nav-img">
+          History</a></li>
     </ul>
-  </nav>
-   <section id='data-upload-sec'></section> 
-   <section id="dist-calc-sec"></section>
+    </div>
+   <section id='data-upload-sec'>
+      <!-- <h2>Upload Bus/Route File</h2>
+    <div id="upload-area">
+      <form method="post" enctype="multipart/form-data">
+        <div class="upload-contain"><img src="upload-icon.png" alt='data-upload' class="upload-img"></div>
+        <label for="file"> Drop files here
+        <p>Or click to browse</p>
+        <p>Supports .csv files upto 10MB</p>
+        </label>
+        <input type="file" id="fileInput">
+        <br/><br/>
+        <button onclick="uploadFile()">Upload</button>
+      </form>
+    </div> -->   
+    <div class="details">Upload route data and optimize driver assignments</div>  
+    <div class="container">
+      <h3>Upload Your files</h3>
+      <div class="drag-area">
+        <div class="icon">
+          <img src="upload-icon.png" alt='data-upload' class="upload-img">
+        </div>
+        <span class="header">Drag & Drop</span>
+        <span class="header">or <span class="button">browse</span></span>
+        <span class="support">Supports: .csv files only <br/>(save excel files as csv to upload)</span>
+      </div>
+    </div>
+   </section> 
+   <section id="dist-calc-sec">
+    <h2>Ready to Calculate Distances</h2>
+    <p1>Start distance calculation to compute optimal routes between drivers and pickup points.</p1>
+    <button id="start" onclick="generate_distance_matrix()">Start Calculating</button>
+   </section>
    <section id="optimization-sec"></section>
    <section id="export-sec"></section>
    <section id='history-sec'></section>
-  <h2>Upload Bus/Route File</h2>
-  <input type="file" id="fileInput">
-  <button onclick="uploadFile()">Upload</button>
+  
   <pre id="resultBox"></pre>
-  <link rel="stylesheet" href="project-page.css">
+  <link rel="stylesheet" href="project.css">
 </body>
 </html>

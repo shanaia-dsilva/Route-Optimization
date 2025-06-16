@@ -1,0 +1,3 @@
+driverId,driverName,startLat,startLng,startAddress,pickupId,pickupLat,pickupLng,pickupAddress,deliveryAddress,priority
+D001,John Smith,40.7128,-74.006,"123 Main St, New York, NY 10001",P001,40.7589,-73.9851,"456 Broadway, New York, NY 10013","789 Fifth Ave, New York, NY 10022",1
+D002,Jane Doe,40.6892,-74.0445,"321 Liberty St, Jersey City, NJ 07302",P002,40.7505,-73.9934,"200 Park Ave, New York, NY 10166","1 World Trade Center, New York, NY 10007",2

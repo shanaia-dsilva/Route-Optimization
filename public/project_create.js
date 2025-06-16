@@ -33,8 +33,8 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("scroll", onScroll);
 });
 
-const dragArea = document.querySelector('.drag-area');
-const dragText = document.querySelector('.header');
+const dragArea=document.querySelector('.drag-area');
+const dragText=document.querySelector('.header');
 
 dragArea.addEventListener('dragover', (event) => {
     event.preventDefault();
@@ -42,24 +42,11 @@ dragArea.addEventListener('dragover', (event) => {
 });
 
 dragArea.addEventListener('dragleave', () => {
+    
     dragArea.classList.remove('active');
+    
 });
 
 dragArea.addEventListener('drop', (event) => {
     event.preventDefault();
-    dragArea.classList.remove('active'); // Optional: reset UI
-    let file = event.dataTransfer.files[0];
-
-    if (file && file.name.endsWith('.csv')) {
-        let fileReader = new FileReader();
-        fileReader.onload = () => {
-            let fileContent = fileReader.result;
-            console.log(fileContent); // or handle the CSV content
-        };
-        fileReader.readAsText(file); // best for reading CSV
-    } else {
-        document.getElementById('file-stat').innerHTML = 'Please upload a .csv file only';
-        alert('Invalid file');
-    }
 });
-

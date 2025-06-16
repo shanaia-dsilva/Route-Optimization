@@ -69,8 +69,10 @@ body {
   height:15px;
 }
 section {
-  padding:1rem 1rem 0 19rem;
-  height:100vh;
+  margin:1rem 1rem 3rem 19rem;
+  padding: 1rem;
+  border:lightgrey solid 1px;
+  border-radius: 6px;
 }
 
 .container {
@@ -297,7 +299,7 @@ section {
   background-color: #e5b79ea6;
   align-items: center;
   justify-content: left;
-  margin:20px 0;
+  margin:15px 0 0 0;
   border-radius: 5px;
   padding:5px;
 }

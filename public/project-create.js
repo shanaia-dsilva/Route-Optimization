@@ -1,4 +1,39 @@
-document.addEventListener("DOMContentLoaded", () => {
+
+
+// Project name input 
+// document.addEventListener("DOMContentLoaded", () => {
+// const overlay = document.getElementById("project-overlay");
+// const projectNameInput = document.getElementById("projectName");
+// const submitBtn = document.getElementById("submitProjectName");
+
+// window.onload = () => {
+//   projectNameInput.focus();
+// };
+
+// function handleProjectSubmit () {
+//   const name = projectNameInput.value.trim();
+//   if (name) {
+//     overlay.style.display = "none"; // hide overlay
+//     // Store for later use (optional)
+//     localStorage.setItem("projectName", name);
+//   } else {
+//     alert("Please enter a project name.");
+//   }
+//     document.getElementById('project-title').textContent=name;
+// }
+// // submitBtn.addEventListener("click", () => {
+// submitBtn.addEventListener("click", handleProjectSubmit);
+  
+// projectNameInput.addEventListener("keydown", (event) => {
+//   if (event.key === "Enter") {
+//     handleProjectSubmit();
+//   }
+// });
+// function changeProjectName() {
+
+// }
+
+  // active section effect
   const sections = document.querySelectorAll("section");
   const navLinks = document.querySelectorAll(".nav-list");
 
@@ -31,8 +66,22 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   window.addEventListener("scroll", onScroll);
-});
+// });
 
+// input browse button
+let file;
+
+let btn=document.querySelector('.button');
+let input=document.querySelector('input[type="file"]');
+
+btn.onclick = () => {
+  input.click();
+}
+
+input.addEventListener ('change', function () {
+  file=this.files[0];
+})
+// Drag & drop area features
 const dragArea = document.querySelector('.drag-area');
 const dragText = document.querySelector('.header');
 
@@ -48,7 +97,7 @@ dragArea.addEventListener('dragleave', () => {
 dragArea.addEventListener('drop', (event) => {
     event.preventDefault();
     dragArea.classList.remove('active'); // Optional: reset UI
-    let file = event.dataTransfer.files[0];
+    file = event.dataTransfer.files[0];
 
     if (file && file.name.endsWith('.csv')) {
         let fileReader = new FileReader();
@@ -63,13 +112,14 @@ dragArea.addEventListener('drop', (event) => {
     }
 });
 
+// back end integration with mysql-connector
 
-const projectNameInput = document.getElementById("projectName");
+// sending it to backend
+// 👇 Get the project name from localStorage (set earlier after user input)
+const projectName = localStorage.getItem("projectName");
 
 const formData = new FormData();
-formData.append("file", yourCsvFile); // replace `yourCsvFile` with actual file object
-
-const projectName = projectNameInput.value.trim();
+formData.append("file", file); // replace with actual file object reference
 
 fetch(`http://localhost:8000/optimize?project_name=${encodeURIComponent(projectName)}`, {
   method: "POST",
@@ -82,4 +132,5 @@ fetch(`http://localhost:8000/optimize?project_name=${encodeURIComponent(projectN
 .catch(err => {
   console.error("Upload failed:", err);
 });
+
 

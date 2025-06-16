@@ -3,6 +3,9 @@ uvicorn
 pandas
 requests
 scipy
+mysql-connector-python
+python-dotenv
+
 upload --> get lat, longs -->
 validate --> haversine algorithm 
 report the data that seems wrong, for further verification

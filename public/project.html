@@ -37,22 +37,75 @@
     </ul>
     <a href="index.html" class="back-btn"><img src="back.png" ></a>
     </div>
+    <!-- <div id="project-overlay">
+      <div class="project-name-inp">
+        <input type="text" id="projectName" placeholder="Enter Project Name">
+        <button  id="submitProjectName">Create Project</button>
+      </div>
+    </div> -->
+
    <section id='data-upload-sec'>
     <div class="page-details">
-      <h2>Route Optimization Workflow</h2>
-      <p>Upload route data and optimize driver assignments</p></div>  
+      <h2 id="project-title">Route Optimization Project</h2>
+      <p>Upload route data and optimize driver assignments</p>
+    </div>  
+
+    <div class="data-container">
       <div class="container">
-      <h3>Upload Your files</h3>
-      <div class="drag-area">
-        <div class="icon">
-          <img src="upload-icon.png" alt='data-upload' class="upload-img">
+        <h3>Upload Your files</h3>
+        <div class="drag-area">
+          <div class="icon">
+            <img src="upload-icon.png" alt='data-upload' class="upload-img">
+          </div>
+          <span class="header">Drag & Drop</span>
+          <span class="header">or <span class="button">browse</span></span>
+          <input type="file" hidden/>
+          <span class="support">Supports: .csv files only <br/>(save excel files as csv to upload)</span>
         </div>
-        <span class="header">Drag & Drop</span>
-        <span class="header">or <span class="button">browse</span></span>
-        <span class="support">Supports: .csv files only <br/>(save excel files as csv to upload)</span>
+      </div>
+      <div id="file-stat">
+        <h3><img src="required.jpg" class="nav-img"> Required CSV Format:</h3>
+        <table class="csv-details">
+          <tr>
+            <td>Vehicle Number</td>
+            <td>Institute</td>
+          </tr>
+          <tr>
+            <td>Driver point geocode</td>
+            <td>1st Pick up geocode</td>
+          </tr>
+          <tr>
+            <td>Last drop</td>
+            <td>Last Drop to Driver pt km</td>
+          </tr>
+          <tr>
+            <td>Dead km</td>
+            <td>Daily total distance</td>
+          </tr>
+          <tr>
+            <td>No. of trips daily</td>
+            <td>AC/Non-AC</td>
+          </tr>
+        </table>
+        <a href="sample-data.csv" download class="download-btn">Download Sample CSV</a>
       </div>
     </div>
-    <div id="file-stat"></div>
+    <div class="process-settings">
+      <div class="setting">
+        <div>
+          <h3>Distance validation Method</h3>
+          <p>Haversine Algorithm</p>
+        </div>
+        <div>
+          <h3>Optimization Method</h3>
+          <p>Hungarian Algorithm</p>
+        </div>
+        <div>
+          <h3>Dead kilometer treshold (km)</h3>
+          <p>5km</p>
+        </div>
+      </div>
+    </div>
    </section> 
    <section id="dist-calc-sec">
      <div class="page-details">

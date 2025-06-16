@@ -73,6 +73,7 @@ section {
   padding: 1rem;
   border:lightgrey solid 1px;
   border-radius: 6px;
+  height:100vh;
 }
 
 .container {

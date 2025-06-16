@@ -1,11 +1,10 @@
-from fastapi import FastAPI, UploadFile, File
+from fastapi import FastAPI, UploadFile, File, Query
 from fastapi.middleware.cors import CORSMiddleware
 import pandas as pd
 from optimizer import process_and_optimize
 
 app = FastAPI()
 
-# Allow frontend to talk to backend (CORS)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -15,7 +14,7 @@ app.add_middleware(
 )
 
 @app.post("/optimize")
-async def optimize(file: UploadFile = File(...)):
+async def optimize(file: UploadFile = File(...), project_name: str = Query(...)):
     df = pd.read_csv(file.file)
-    result = process_and_optimize(df)
+    result = process_and_optimize(df, project_name)
     return {"message": "Optimization complete", "result": result}

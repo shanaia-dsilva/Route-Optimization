@@ -63,3 +63,23 @@ dragArea.addEventListener('drop', (event) => {
     }
 });
 
+
+const projectNameInput = document.getElementById("projectName");
+
+const formData = new FormData();
+formData.append("file", yourCsvFile); // replace `yourCsvFile` with actual file object
+
+const projectName = projectNameInput.value.trim();
+
+fetch(`http://localhost:8000/optimize?project_name=${encodeURIComponent(projectName)}`, {
+  method: "POST",
+  body: formData,
+})
+.then(res => res.json())
+.then(data => {
+  console.log("Upload success:", data);
+})
+.catch(err => {
+  console.error("Upload failed:", err);
+});
+

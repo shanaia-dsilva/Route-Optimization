@@ -54,7 +54,6 @@ body {
   display: flex;
   align-items: center;
   gap: 5px;
-  /* background-color: #e5b79e; */
 }
 .logo-img {
   width: 40px;
@@ -68,7 +67,6 @@ body {
 .nav-img{
   width:15px;
   height:15px;
-  /* display: inline-block; */
 }
 section {
   padding:1rem 5rem 0 19rem;
@@ -132,7 +130,6 @@ section {
 }
 
 .drag-area.active {
-  /* border : solid #e5b79e 2px; */
   background-color: beige;
 ;
 }
@@ -155,22 +152,6 @@ section {
   color: #555;
   margin:0 0 10px 0;
 
-}
-
-.workflow {
-  display:flex;
-  flex-direction: row;
-  margin:10px 0 ;
-  gap:12%;
-}
-
-.steps {
-  display:flex;
-  flex-direction: row;
-}
-
-.step-number {
-  background-color: beige;
 }
 
 #file-stat {

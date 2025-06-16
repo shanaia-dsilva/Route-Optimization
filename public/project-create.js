@@ -112,6 +112,27 @@ dragArea.addEventListener('drop', (event) => {
     }
 });
 
+
+//loading tab
+const loadingOverlay = document.getElementById("loadingOverlay");
+
+loadingOverlay.style.display = "flex"; // show loading
+
+fetch(`http://localhost:8000/optimize?project_name=${encodeURIComponent(projectName)}`, {
+  method: "POST",
+  body: formData,
+})
+.then(res => res.json())
+.then(data => {
+  console.log("Upload success:", data);
+})
+.catch(err => {
+  console.error("Upload failed:", err);
+})
+.finally(() => {
+  loadingOverlay.style.display = "none"; // hide again
+});
+
 // back end integration with mysql-connector
 
 // sending it to backend

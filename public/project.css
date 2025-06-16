@@ -139,7 +139,7 @@ section {
   align-items: center;
   width:28rem;
   padding:15px;
-  margin: 30px 0;
+  margin: 1.2rem 0;
   border:lightgray solid 1px;
   border-radius: 5px; 
   text-align: left;
@@ -149,12 +149,14 @@ section {
 }
 
 #file-stat td {
-  /* border:lightgray solid 1px;
-  border-radius: 5px;  */
   text-align: left;
   font-family: 'Courier New', Courier, monospace;
   font-size: small;
-  
+}
+#file-stat p{
+  font-size:15px;
+  color: #555;
+  margin:0;
 }
 
 .drag-area {
@@ -285,4 +287,23 @@ section {
 }
 .setting h3 {
   font-size: 15px;
+}
+
+.loading-overlay {
+  bottom: 0;
+  display: none; 
+  width: 68vw;
+  height: 4vh;
+  background-color: #e5b79ea6;
+  align-items: center;
+  justify-content: left;
+  margin:20px 0;
+  border-radius: 5px;
+  padding:5px;
+}
+
+.loading-message {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #333;
 }

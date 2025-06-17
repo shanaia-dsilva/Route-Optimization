@@ -37,12 +37,12 @@
     </ul>
     <a href="index.html" class="back-btn"><img src="back.png" ></a>
     </div>
-    <!-- <div id="project-overlay">
+    <div id="project-overlay">
       <div class="project-name-inp">
-        <input type="text" id="projectName" placeholder="Enter Project Name">
+        <input type="text" name="projectName" id="projectName" placeholder="Enter Project Name">
         <button  id="submitProjectName">Create Project</button>
       </div>
-    </div> -->
+    </div>
 
    <section id='data-upload-sec'>
     <div class="page-details">
@@ -54,14 +54,17 @@
       <div class="container">
         <h3>Upload Your files</h3>
         <div class="drag-area">
-          <div class="icon">
+          <form action="/optimize" method="post" enctype="multipart/form-data">
+            <div class="icon">
             <img src="upload-icon.png" alt='data-upload' class="upload-img">
           </div>
           <span class="header">Drag & Drop</span>
           <span class="header">or <span class="button">browse</span></span>
-          <input type="file" hidden/>
+          <input type="file" name="file" hidden/>
           <span class="support">Supports: .csv files only <br/>(save excel files as csv to upload)</span>
-        </div>
+          <button type="submit">Upload CSV</button>
+        </form>
+          </div>
       </div>
       <div id="file-stat">
         <h3><img src="required.jpg" class="nav-img"> Required CSV Format:</h3>

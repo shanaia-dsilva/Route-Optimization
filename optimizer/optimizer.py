@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 def clean_column(col):
-    return col.lower().replace(" ", "_")
+    return col.lower().replace(" ", "_").replace("/","_").replace("-","_")
 
 def process_and_optimize(df, project_name):
     # Sanitize column names

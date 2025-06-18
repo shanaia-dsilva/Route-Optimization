@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     const file = input.files[0];
-    if (!file) return alert("Please upload a CSV file");
+    if (!file) return alert("Please choose a CSV file first");
 
     const reader = new FileReader();
     reader.onload = async (event) => {

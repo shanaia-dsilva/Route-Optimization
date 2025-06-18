@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Elements
+ 
   const overlay = document.getElementById("project-overlay");
   const projectNameInput = document.getElementById("projectName");
   const submitBtn = document.getElementById("submitProjectName");
@@ -9,15 +9,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const btn = document.querySelector('.button');
   const loadingOverlay = document.getElementById("loadingOverlay");
   const form = document.querySelector("form");
+  const headDiv = document.querySelector(".data_head");
 
   let file;
 
-  // Focus on project name input on load
+  // project name focus on load
   window.onload = () => {
     projectNameInput.focus();
   };
 
-  // Handle project name submit
+  // handle project name submit
   function handleProjectSubmit() {
     const name = projectNameInput.value.trim();
     if (name) {
@@ -37,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Section highlight on scroll
+  // active section feature
   const sections = document.querySelectorAll("section");
   const navLinks = document.querySelectorAll(".nav-list");
 
@@ -71,14 +72,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   window.addEventListener("scroll", onScroll);
 
-  // File input browse button
+  // file inpt browse button
   btn.onclick = () => input.click();
 
   input.addEventListener('change', function () {
     file = this.files[0];
   });
 
-  // Drag & drop area
+  // drag & drop area
   dragArea.addEventListener('dragover', (event) => {
     event.preventDefault();
     dragArea.classList.add('active');
@@ -110,31 +111,42 @@ document.addEventListener("DOMContentLoaded", () => {
   // Form submission
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
-
-    const projectName = localStorage.getItem("projectName");
-    if (!projectName) {
-      alert("Project name is missing.");
-      return;
-    }
-
-    if (!input.files[0]) {
-      alert("Please upload a CSV file.");
-      return;
-    }
-
     const formData = new FormData();
     formData.append("file", input.files[0]);
 
+    const projectName = localStorage.getItem("projectName");
     loadingOverlay.style.display = "flex";
+    document.querySelector('.loading-message').textContent="Uploading..";
 
     try {
       const res = await fetch(`http://localhost:8000/optimize?project_name=${encodeURIComponent(projectName)}`, {
         method: "POST",
         body: formData,
       });
-
       const data = await res.json();
       console.log("Upload success:", data);
+
+      //preview of data.head()
+      
+      if (data.head && Array.isArray(data.head) && data.head.length > 0) {
+        const headers = Object.keys(data.head[0]);
+        const table = `
+          <table border="1" cellpadding="5" cellspacing="0">
+            <thead>
+              <tr>${headers.map(h => `<th>${h}</th>`).join("")}</tr>
+            </thead>
+            <tbody>
+              ${data.head.map(row => `
+                <tr>${headers.map(h => `<td>${row[h]}</td>`).join("")}</tr>
+              `).join("")}
+            </tbody>
+          </table>
+        `;
+        headDiv.innerHTML = table;
+      } else {
+        headDiv.innerHTML = "<p>No preview available.</p>";
+      }
+
     } catch (err) {
       console.error("Upload failed:", err);
     } finally {
@@ -142,3 +154,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+
+

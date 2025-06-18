@@ -20,7 +20,12 @@ async def optimize(file: UploadFile = File(...), project_name: str = Query(...))
     try:
         df = pd.read_csv(file.file)
         result = process_and_optimize(df, project_name)
-        return {"message": "Optimization complete", "result": result}
+        return {
+            "message": "Optimization complete",
+            "project": project_name,
+            "head": df.head().to_dict(orient="records"),  # ✅ Moved here
+            "result": result
+        }
     except Exception as e:
-        print("❌ ERROR:", str(e))  # Show in terminal
-        raise HTTPException(status_code=500, detail=str(e))  # Show in Swagger
+        print("❌ ERROR:", str(e))
+        raise HTTPException(status_code=500, detail=str(e))

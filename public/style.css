@@ -65,6 +65,8 @@ hr {
   justify-content: space-between;
   align-items: center;  
   list-style-type: none;
+  font-size: small;
+  font-weight: 600;
 }
 
 #dashboard li h1 {
@@ -74,6 +76,8 @@ hr {
 }
 
 p {
+  font-size: medium;
+  font-weight: lighter;
     margin:0;
     color:rgb(138, 112, 75);
 }

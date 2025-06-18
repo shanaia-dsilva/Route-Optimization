@@ -12,7 +12,7 @@ def process_and_optimize(df, project_name):
     df.columns = [clean_column(c) for c in df.columns]
 
     # Sanitize table name
-    table_name = f"project_{project_name.lower().trim().replace(' ', '_').replace('.','')}"
+    table_name = f"project_{project_name.lower().replace(' ', '_').replace('.','')}"
 
     conn = mysql.connector.connect(
         host=os.getenv("MYSQL_HOST"),

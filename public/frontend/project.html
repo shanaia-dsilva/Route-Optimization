@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>New Route Optimizer</title>
+  <script src="project_create.js" defer></script>
+</head>
+<body>
+  <nav id='nav-bar'>
+   
+    <div id="nav-head">
+       <img src="logo.png" alt='data-upload' class="logo-img">
+       <h2>Route Optimizer</h2>
+      <p>Efficient assignments</p>
+    </div>
+    <hr>
+    <ul>
+        <li class="nav-list">
+          <img src="upload-icon.png" alt='data-upload' class="nav-img">
+          <a id="upload" href="#data-upload">Data Upload</a></li>
+        <li class="nav-list">
+          <img src="calculate-icon.png" alt='calculation' class="nav-img">
+          <a id="calculate" href="#dist-calc-sec">Distance Calculation</a></li>
+        <li class="nav-list">
+          <img src="optimize-icon.png" alt='optimization' class="nav-img">
+          <a id="optimize" href="#optimization-sec">Optimization</a></li>
+        <li class="nav-list">
+          <img src="export-icon.png" alt='export' class="nav-img">
+          <a id="export" href="#export-sec">Export Results</a></li>
+        <li class="nav-list">
+          <img src="history-icon.png" alt='history' class="nav-img">
+          <a id="history" href="#history-sec">History</a></li>
+    </ul>
+  </nav>
+   <section id='data-upload-sec'>
+    <h2>Upload Bus/Route File</h2>
+    <div id="upload-area">
+      <form method="post" enctype="multipart/form-data">
+        <label for="file"> Drop files here
+        <p>Or click to browse</p>
+        <p>Supports .csv files upto 10MB</p>
+        </label>
+        <input type="file" id="fileInput">
+        <br/><br/>
+        <button onclick="uploadFile()">Upload</button>
+      </form>
+    </div>
+   </section> 
+   <section id="dist-calc-sec">
+    <h2>Ready to Calculate Distances</h2>
+    <p1>Start distance calculation to compute optimal routes between drivers and pickup points.</p1>
+    <button id="start" onclick="generate_distance_matrix()">Start Calculating</button>
+   </section>
+   <section id="optimization-sec"></section>
+   <section id="export-sec"></section>
+   <section id='history-sec'></section>
+  
+  <pre id="resultBox"></pre>
+  <link rel="stylesheet" href="project-page.css">
+</body>
+</html>

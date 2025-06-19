@@ -1,162 +1,60 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <title>New Route Optimizer</title>
-  <script src="project-create.js" defer></script>
+  <script src="project_create.js" defer></script>
 </head>
-
 <body>
-  <!-- NAV BAR -->
-  <div id="nav-head">
+  <nav id='nav-bar'>
+   
+    <div id="nav-head">
+       <img src="logo.png" alt='data-upload' class="logo-img">
+       <h2>Route Optimizer</h2>
+      <p>Efficient assignments</p>
+    </div>
+    <hr>
     <ul>
-      <li>
-        <div class="logo-container">
-          <img src="logo.png" alt="logo" class="logo-img">
-          <div class="logo-text">
-            <h2>Route Optimizer</h2>
-          </div>
-        </div>
-      </li>
-      <hr>
-      <li class="nav-list">
-        <a id="upload" href="#data-upload-sec">
+        <li class="nav-list">
           <img src="upload-icon.png" alt='data-upload' class="nav-img">
-          Data Upload</a>
-      </li>
-      <li class="nav-list">
-        <a id="calculate" href="#dist-calc-sec">
-          <img src="calcc.png" alt='calculation' class="nav-img">
-          Distance Calculation</a>
-      </li>
-      <li class="nav-list">
-        <a id="optimize" href="#optimization-sec">
+          <a id="upload" href="#data-upload">Data Upload</a></li>
+        <li class="nav-list">
+          <img src="calculate-icon.png" alt='calculation' class="nav-img">
+          <a id="calculate" href="#dist-calc-sec">Distance Calculation</a></li>
+        <li class="nav-list">
           <img src="optimize-icon.png" alt='optimization' class="nav-img">
-          Optimization</a>
-      </li>
-      <li class="nav-list">
-        <a id="export" href="#export-sec"><img src="export-icon.png" alt='export' class="nav-img">
-          Export Results</a>
-      </li>
-      <li class="nav-list">
-        <a id="history" href="#history-sec"><img src="history-icon.png" alt='history' class="nav-img">
-          History</a>
-      </li>
+          <a id="optimize" href="#optimization-sec">Optimization</a></li>
+        <li class="nav-list">
+          <img src="export-icon.png" alt='export' class="nav-img">
+          <a id="export" href="#export-sec">Export Results</a></li>
+        <li class="nav-list">
+          <img src="history-icon.png" alt='history' class="nav-img">
+          <a id="history" href="#history-sec">History</a></li>
     </ul>
-    <a href="index.html" class="back-btn"><img src="back.png"></a>
-  </div>
-  <div id="project-overlay">
-    <div class="project-name-inp">
-      <input type="text" name="projectName" id="projectName" placeholder="Enter Project Name">
-      <button type="submit" id="submitProjectName">Create Project</button>
+  </nav>
+   <section id='data-upload-sec'>
+    <h2>Upload Bus/Route File</h2>
+    <div id="upload-area">
+      <form method="post" enctype="multipart/form-data">
+        <label for="file"> Drop files here
+        <p>Or click to browse</p>
+        <p>Supports .csv files upto 10MB</p>
+        </label>
+        <input type="file" id="fileInput">
+        <br/><br/>
+        <button onclick="uploadFile()">Upload</button>
+      </form>
     </div>
-  </div>
-  <!-- DATA UPLOAD SECTION -->
-  <section id='data-upload-sec'>
-    <div class="page-details">
-      <h2 id="project-title">Route Optimization Project</h2>
-      <p>Upload route data and optimize driver assignments</p>
-    </div>
-
-    <div class="data-container">
-      <div class="container">
-        <h3>Upload Your files</h3>
-        <div class="drag-area">
-          <form action="/optimize" method="post" enctype="multipart/form-data">
-            <div class="icon">
-              <img src="upload-icon.png" alt='data-upload' class="upload-img">
-            </div>
-            <span class="header">Drag & Drop</span>
-            <br /><span class="header">or <span class="button">browse</span></span>
-            <input type="file" name="file" hidden />
-            <br /><span class="support">Supports: .csv files only <br />(save excel files as csv to upload)</span>
-            <button type="submit" class="upload-btn">Upload CSV</button>
-          </form>
-        </div>
-      </div>
-      <div id="file-stat">
-        <h3><img src="required.jpg" class="nav-img"> Required CSV Format:</h3>
-        <p>Required columns (exact names):</p>
-        <table class="csv-details">
-          <tr>
-            <td>Vehicle Number</td>
-            <td>Institute</td>
-          </tr>
-          <tr>
-            <td>Driver point geocode</td>
-            <td>1st Pick up geocode</td>
-          </tr>
-          <tr>
-            <td>Last drop</td>
-            <td>Last Drop to Driver pt km</td>
-          </tr>
-          <tr>
-            <td>Dead km</td>
-            <td>Daily total distance</td>
-          </tr>
-          <tr>
-            <td>No. of trips daily</td>
-            <td>AC/Non-AC</td>
-          </tr>
-        </table>
-        <a href="sample-data.csv" download class="download-btn">Download Sample CSV</a>
-      </div>
-    </div>
-    <div class="process-settings">
-      <div class="setting">
-        <div>
-          <h3>Distance validation Method</h3>
-          <p>Haversine Algorithm</p>
-        </div>
-        <div>
-          <h3>Optimization Method</h3>
-          <p>Hungarian Algorithm</p>
-        </div>
-        <div>
-          <h3>Dead kilometer treshold (km)</h3>
-          <p>5km</p>
-        </div>
-      </div>
-    </div>
-    <div id="loadingOverlay" class="loading-overlay">
-      <div class="loading-message"></div>
-    </div>
-  </section>
-
-  <!-- DISTANCE CALCULATION SECTION -->
-  <section id="dist-calc-sec">
-    <div class="page-details">
-      <h2>Ready to Calculate Distances</h2>
-      <p>Start distance calculation to compute optimal routes between drivers and pickup points.</p>
-    </div>
-    <h4>Preview of table:</h4>
-    <div class="table-wrapper">
-      <h4>(Top rows)</h4>
-      <table class="data_head">
-        <!--table data from form goes here-->
-      </table>
-    </div>
-  </section>
-
-  <!-- OPTIMIZATION SECTIOM -->
-  <section id="optimization-sec">
-    <div class="page-details">
-      <h2>Route Optimization</h2>
-      <p1>Optimize driver-pickup assignments using Hungarian algorithm</p1>
-    </div>
-  </section>
-
-  <!-- REPORT EXPORT SECTION  -->
-  <section id="export-sec">
-    <div class="page-details">
-      <h2>Export Results</h2>
-      <p1>Export your optimized driver assignment results as an excel or view the reports.</p1>
-    </div>
-  </section>
-  <section id='history-sec'></section>
-
+   </section> 
+   <section id="dist-calc-sec">
+    <h2>Ready to Calculate Distances</h2>
+    <p1>Start distance calculation to compute optimal routes between drivers and pickup points.</p1>
+    <button id="start" onclick="generate_distance_matrix()">Start Calculating</button>
+   </section>
+   <section id="optimization-sec"></section>
+   <section id="export-sec"></section>
+   <section id='history-sec'></section>
+  
   <pre id="resultBox"></pre>
-  <link rel="stylesheet" href="project.css">
+  <link rel="stylesheet" href="project-page.css">
 </body>
-
 </html>

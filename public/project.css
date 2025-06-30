@@ -76,6 +76,19 @@ section {
   height:100vh;
 }
 
+.table-div {
+  overflow-x: auto;
+  /* border:lightgray solid 1px;
+  border-radius: 5px;  */
+  /* font-family: 'Courier New', Courier, monospace; */
+  align-items: center;
+  padding:0 15px 15px 15px;
+  text-align: left;
+  font-size: small;
+  display:flex;
+  flex-direction: row;
+  gap: 1rem;
+}
 .container {
   display:flex;
   align-items: center;

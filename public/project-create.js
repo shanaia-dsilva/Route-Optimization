@@ -1,4 +1,3 @@
-// project-create.js
 
 document.addEventListener("DOMContentLoaded", () => {
   const input = document.getElementById("csv-input");
@@ -19,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const reader = new FileReader();
     reader.onload = (e) => {
       const text = e.target.result;
-      const rows = text.trim().split("\n");
+      const rows = text.trim().split(/\r?\n/);
       if (rows.length < 1) {
         headDiv.innerHTML = "<p>No data found in CSV.</p>";
         return;
@@ -34,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <tr>${headers.map(h => `<th>${h}</th>`).join("")}</tr>
           </thead>
           <tbody>
-            ${previewRows.map(row => `<tr>${row.map(cell => `<td>${cell}</td>`).join("")}</tr>`).join("")}
+            ${previewRows.map(row => `<tr>${headers.map((_, i) => `<td>${row[i] || ""}</td>`).join("")}</tr>`).join("")}
           </tbody>
         </table>
       `;
@@ -64,7 +63,11 @@ document.addEventListener("DOMContentLoaded", () => {
         body: formData
       });
 
-      if (!res.ok) throw new Error("Upload failed with status " + res.status);
+      if (!res.ok) {
+        const errorText = await res.text();
+        console.error("Server error:", errorText);
+        throw new Error("Upload failed with status " + res.status);
+      }
 
       const blob = await res.blob();
       const url = URL.createObjectURL(blob);
@@ -76,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       status.textContent = "File processed and downloaded.";
     } catch (err) {
-      console.error(err);
+      console.error("Upload error:", err);
       status.textContent = "Something went wrong during upload.";
     }
   });

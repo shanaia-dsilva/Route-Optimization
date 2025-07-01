@@ -1,11 +1,45 @@
+// const form = document.getElementById("csv-form");
+// const input = document.getElementById("file-input");
+// const browseBtn = document.querySelector(".button");
+// const uploadBtn= document.querySelector(".upload-btn");
+
+
+// Handle file input and drag-and-drop functionality
+
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("csv-form");
-  const input = document.getElementById("csv-input");
+  const input = document.getElementById("file-input");
   const browseBtn = document.querySelector(".button");
   const status = document.getElementById("status");
+  const previewTable = document.querySelector(".data_head");
 
-  // Click "browse" text triggers file input
+  // Click "browse" triggers file input
   browseBtn.addEventListener("click", () => input.click());
+
+  // Show CSV preview when file is selected
+  input.addEventListener("change", () => {
+    const file = input.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      const text = e.target.result;
+      const lines = text.trim().split("\n");
+      previewTable.innerHTML = ""; // Clear old preview
+
+      lines.slice(0, 6).forEach((line, index) => {
+        const row = document.createElement("tr");
+        line.split(",").forEach((cell) => {
+          const td = document.createElement(index === 0 ? "th" : "td");
+          td.textContent = cell.trim();
+          row.appendChild(td);
+        });
+        previewTable.appendChild(row);
+      });
+    };
+
+    reader.readAsText(file);
+  });
 
   // Handle form submission
   form.addEventListener("submit", async (e) => {

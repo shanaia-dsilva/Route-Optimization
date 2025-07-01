@@ -1,86 +1,83 @@
-// Existing DOMContentLoaded stays the same
+// project-create.js
+
 document.addEventListener("DOMContentLoaded", () => {
   const input = document.getElementById("csv-input");
   const btn = document.querySelector(".button");
-  const form = document.querySelector("form");
   const headDiv = document.querySelector(".data_head");
+  const form = document.querySelector("#csv-form");
   const status = document.getElementById("status");
 
-  // Browse button triggers file dialog
   btn.onclick = () => input.click();
 
-  // Handle file selection and preview generation
   input.addEventListener("change", () => {
     const file = input.files[0];
-    if (!file) return;
+    if (!file || !file.name.endsWith(".csv")) {
+      status.textContent = "Please select a valid CSV file.";
+      return;
+    }
 
     const reader = new FileReader();
     reader.onload = (e) => {
       const text = e.target.result;
-      const rows = text.split(/\r?\n/).filter(r => r.trim() !== "");
-      if (rows.length === 0) {
-        headDiv.innerHTML = "<p>No data in CSV file.</p>";
+      const rows = text.trim().split("\n");
+      if (rows.length < 1) {
+        headDiv.innerHTML = "<p>No data found in CSV.</p>";
         return;
       }
 
-      const headers = rows[0].split(",");
-      const numRows = Math.min(6, rows.length - 1);
+      const headers = rows[0].split(",").map(h => h.trim());
+      const previewRows = rows.slice(1, 6).map(row => row.split(","));
 
-      const table = document.createElement("table");
-      table.border = "1";
-      table.cellPadding = "5";
-      table.cellSpacing = "0";
-
-      const thead = document.createElement("thead");
-      const headRow = document.createElement("tr");
-      headers.forEach(h => {
-        const th = document.createElement("th");
-        th.textContent = h.trim();
-        headRow.appendChild(th);
-      });
-      thead.appendChild(headRow);
-      table.appendChild(thead);
-
-      const tbody = document.createElement("tbody");
-      for (let i = 1; i <= numRows; i++) {
-        const row = rows[i].split(",");
-        const tr = document.createElement("tr");
-        headers.forEach((_, j) => {
-          const td = document.createElement("td");
-          td.textContent = row[j] ? row[j].trim() : "";
-          tr.appendChild(td);
-        });
-        tbody.appendChild(tr);
-      }
-
-      table.appendChild(tbody);
-      headDiv.innerHTML = "";
-      headDiv.appendChild(table);
+      const table = `
+        <table border="1" cellpadding="5" cellspacing="0">
+          <thead>
+            <tr>${headers.map(h => `<th>${h}</th>`).join("")}</tr>
+          </thead>
+          <tbody>
+            ${previewRows.map(row => `<tr>${row.map(cell => `<td>${cell}</td>`).join("")}</tr>`).join("")}
+          </tbody>
+        </table>
+      `;
+      headDiv.innerHTML = table;
     };
+
     reader.readAsText(file);
   });
 
-  // Keep your existing form submission code untouched
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append("file", input.files[0]);
 
-    const projectName = localStorage.getItem("projectName") || "Unnamed Project";
-    document.getElementById("loadingOverlay").style.display = "flex";
-    document.querySelector(".loading-message").textContent = "Uploading...";
+    const file = input.files[0];
+    if (!file) {
+      status.textContent = "Please select a CSV file first.";
+      return;
+    }
+
+    status.textContent = "Uploading and processing...";
+
+    const formData = new FormData();
+    formData.append("file", file);
 
     try {
-      const res = await fetch(`http://localhost:8000/optimize?project_name=${encodeURIComponent(projectName)}`, {
+      const res = await fetch("http://localhost:8000/calculate", {
         method: "POST",
-        body: formData,
+        body: formData
       });
-      const data = await res.json();
-      console.log("Upload success:", data);
+
+      if (!res.ok) throw new Error("Upload failed with status " + res.status);
+
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "osrm_output.csv";
+      link.click();
+
+      status.textContent = "File processed and downloaded.";
     } catch (err) {
-      console.error("Upload failed:", err);
-    } finally {
-      document.getElementById("loadingOverlay").style.display = "none";
+      console.error(err);
+      status.textContent = "Something went wrong during upload.";
     }
   });
 });

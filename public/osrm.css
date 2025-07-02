@@ -50,9 +50,22 @@ h2 {
 input::file-selector-button{
     background-color: brown;
 }
-button {
+.export-results {
     background-color: brown;
+    padding:1rem;
+    border-radius: 5px;
+    font-weight: 600;
+    /* box-shadow: #555 0px 2px 2px; */
+    border: none;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    transition: ease-in-out 200ms;
 }
+
+.export-results:hover {
+   background-color: rgb(223, 223, 190);
+  /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
+}
+
 hr {
     margin:0rem 2rem;
 }

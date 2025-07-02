@@ -56,21 +56,22 @@
                 </table>
             </div>
         </div>
-            
+
         <div class="data-container">
             <div class="container">
                 <h3>Upload Your files</h3>
                 <div class="drag-area">
-                    <form action="http://localhost:8000/calculate" id="csv-form" method="post" enctype="multipart/form-data">
+                    <form action="http://localhost:8000/calculate" id="csv-form" method="post"
+                        enctype="multipart/form-data">
                         <div class="icon">
                             <img src="upload-icon.png" alt='data-upload' class="project-img">
                         </div>
                         <span class="header">Drag & Drop</span>
                         <br /><span class="header">or <span class="button">browse</span>
-                        <input type="file" id="file-input" name="file" accept=".csv" hidden />
-                        <br/><span class="support">Supports: .csv files only <br />(save excel files as csv to
-                            upload)</span>
-                        <button type="submit" class="upload-btn">Upload CSV</button>
+                            <input type="file" id="file-input" name="file" accept=".csv" hidden />
+                            <br /><span class="support">Supports: .csv files only <br />(save excel files as csv to
+                                upload)</span>
+                            <button type="submit" class="upload-btn">Upload CSV</button>
                     </form>
                     <div id="status"></div>
                 </div>
@@ -93,8 +94,14 @@
                     </tr>
                 </table>
                 <a href="sample_distance_generator.csv" download class="download-btn">Download the Sample CSV</a>
+                <button class="export-results" id="export-btn">Download the Results</button>
             </div>
         </div>
+        <div class="results-container">
+            <h3>Preview of your results</h3>
+            <div id="results-preview"></div>
+        </div>
+
     </section>
 
 </body>
